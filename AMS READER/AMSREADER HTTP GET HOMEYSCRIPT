@@ -1,0 +1,30 @@
+//Http GET AMS READER
+
+//log(args)   <--- IPadress: 192.167.30.82 example
+url = 'http://'+ args + '/data.json'
+//log(url)
+
+
+// Create the request
+const res = await fetch(url);
+if (!res.ok) {
+  throw new Error(res.statusText);
+}
+
+// Get the body JSON
+const body = await res.json();
+//log(body);
+
+
+await tag('AMS_energy_tot', body.ic);
+//log("Energy Tot:", body.ic);
+await tag('AMS_wattage_sys', body.i);
+//log("Wattage:", body.i);
+
+
+
+
+
+
+
+
