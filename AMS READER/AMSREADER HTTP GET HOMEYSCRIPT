@@ -13,13 +13,47 @@ if (!res.ok) {
 
 // Get the body JSON
 const body = await res.json();
-//log(body);
+log(body);
 
 
-await tag('AMS_energy_tot', body.ic);
-//log("Energy Tot:", body.ic);
-await tag('AMS_wattage_sys', body.i);
-//log("Wattage:", body.i);
+
+
+//Energy
+await tag('AMS_energy_imp', body.ic);
+//log("Energy Tot import:", body.ic);
+await tag('AMS_energy_exp', body.ec);
+//log("Energy tot export:", body.ec);
+
+
+//POWER
+await tag('AMS_wattage_sys', body.w);
+//log("Wattage Combined imp/exp:", body.w);
+await tag('AMS_wattage_imp', body.i);
+await tag('AMS_wattage_exp', body.e);
+
+//Phase 1
+await tag('AMS_p1_u', body.l1.u);  //Voltage
+await tag('AMS_p1_i', body.l1.i);  //Amperage
+await tag('AMS_p1_p', body.l1.p);  //Active Power
+await tag('AMS_p1_q', body.l1.q);  //Reactive power
+await tag('AMS_p1_f', body.l1.f);  //Power factor
+
+//Phase 2
+await tag('AMS_p2_u', body.l2.u);  //Voltage
+await tag('AMS_p2_i', body.l2.i);  //Amperage
+await tag('AMS_p2_p', body.l2.p);  //Active Power
+await tag('AMS_p2_q', body.l2.q);  //Reactive power
+await tag('AMS_p2_f', body.l2.f);  //Power factor
+
+log("AMS_p2_f:", body.l2.f);
+
+
+//Phase 3
+await tag('AMS_p3_u', body.l3.u);  //Voltage
+await tag('AMS_p3_i', body.l3.i);  //Amperage
+await tag('AMS_p3_p', body.l3.p);  //Active Power
+await tag('AMS_p3_q', body.l3.q);  //Reactive power
+await tag('AMS_p3_f', body.l3.f);  //Power factor
 
 
 
